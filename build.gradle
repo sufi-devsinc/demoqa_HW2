@@ -12,7 +12,6 @@ dependencies {
     testRuntimeOnly("org.slf4j:slf4j-simple:1.7.32",
             "org.junit.jupiter:junit-jupiter-engine:5.7.2")
 }
-
 test {
     useJUnitPlatform()
 }
