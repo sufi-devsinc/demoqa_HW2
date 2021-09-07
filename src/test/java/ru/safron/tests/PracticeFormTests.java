@@ -11,7 +11,6 @@ import static com.codeborne.selenide.Selenide.open;
 public class PracticeFormTests {
     @BeforeAll
     static void beforeAll(){
-
         Configuration.startMaximized = true;
     }
 
