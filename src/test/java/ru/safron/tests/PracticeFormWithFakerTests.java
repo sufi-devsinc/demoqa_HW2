@@ -1,16 +1,24 @@
 package ru.safron.tests;
 
+import com.github.javafaker.Faker;
 import org.junit.jupiter.api.Test;
+import ru.safron.pages.PracticePage;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
-import static ru.safron.tests.TestData.firstName;
-import static ru.safron.tests.TestData.lastName;
 
-import com.codeborne.selenide.Selenide;
+public class PracticeFormWithFakerTests extends TestBase {
 
-public class PracticeFormTests extends TestBase {
+    PracticePage practicePage = new PracticePage();
+
+    Faker faker = new Faker();
+    String firstName = faker.name().firstName(),
+            lastName = faker.name().lastName(),
+            email = faker.internet().emailAddress(),
+            phone = faker.phoneNumber().cellPhone(),
+            address = faker.address().fullAddress();
+
 
 
     @Test
@@ -19,22 +27,18 @@ public class PracticeFormTests extends TestBase {
         open("https://demoqa.com/automation-practice-form");
         $("#firstName").setValue(firstName);
         $("#lastName").setValue(lastName);
-        $("#userEmail").setValue("Safronova@mail.ru");
+        $("#userEmail").setValue(email);
         $("[for=gender-radio-2]").click();
-        $("#userNumber").setValue("7771112233");
+        $("#userNumber").setValue(phone);
 
-        //17 Jul 1990 datebirth
-        $(".react-datepicker__input-container").click();
-        $(".react-datepicker__month-select").selectOption("July");
-        $(".react-datepicker__year-select").selectOption("1990");
-        $(".react-datepicker__week .react-datepicker__day--017").click();
+        practicePage.calendar.setDate("17", "July", "1990");
+
 
         //subjects
         $("#subjectsInput").setValue("Computer Science").pressEnter();
-        //$("#subjectsInput").pressEnter();
 
         $("[for=hobbies-checkbox-1]").click();
-        $("#currentAddress").setValue("Bla-bla-bla");
+        $("#currentAddress").setValue(address);
 
         //state
         $("#state").click();
@@ -44,26 +48,22 @@ public class PracticeFormTests extends TestBase {
         //city
         $("#city").click();
         $("#react-select-4-input").setValue("Delhi").pressEnter();
-        //$("#react-select-4-input").pressEnter();
 
         $("#submit").click();
 
         //output form
         $(".table-responsive").shouldHave(text(firstName +" "+ lastName));
-        $(".table-responsive").shouldHave(text("Safronova@mail.ru"));
+        $(".table-responsive").shouldHave(text(email));
         $(".table-responsive").shouldHave(text("Female"));
-        $(".table-responsive").shouldHave(text("7771112233"));
-        $(".table-responsive").shouldHave(text("17 July,1990"));
+        $(".table-responsive").shouldHave(text(phone));
+        //$(".table-responsive").shouldHave(text(calendarComponent.toString()));
         $(".table-responsive").shouldHave(text("Computer Science"));
         $(".table-responsive").shouldHave(text("Sports"));
-        $(".table-responsive").shouldHave(text("Bla-bla-bla"));
+        $(".table-responsive").shouldHave(text(address));
         $(".table-responsive").shouldHave(text("NCR Delhi"));
 
 
         //sleep(5000);
-        //Selenide.closeWindow();
-        //Selenide.closeWebDriver();
-
 
     }
 }

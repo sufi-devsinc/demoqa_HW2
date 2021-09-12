@@ -1,6 +1,8 @@
 package ru.safron.tests;
 
 import org.junit.jupiter.api.Test;
+import ru.safron.pages.PracticePage;
+import ru.safron.tests.TestBase;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
@@ -8,26 +10,22 @@ import static com.codeborne.selenide.Selenide.open;
 import static ru.safron.tests.TestData.firstName;
 import static ru.safron.tests.TestData.lastName;
 
-import com.codeborne.selenide.Selenide;
+public class PracticeFormWithPageObjectTests extends TestBase {
 
-public class PracticeFormTests extends TestBase {
-
+    PracticePage practicePage = new PracticePage();
 
     @Test
     void FillPracticeForm(){
+        practicePage.openPage();
 
-        open("https://demoqa.com/automation-practice-form");
-        $("#firstName").setValue(firstName);
-        $("#lastName").setValue(lastName);
+        practicePage.typeFirstName(firstName)
+                    .typeLastName(lastName);
+
         $("#userEmail").setValue("Safronova@mail.ru");
         $("[for=gender-radio-2]").click();
         $("#userNumber").setValue("7771112233");
 
-        //17 Jul 1990 datebirth
-        $(".react-datepicker__input-container").click();
-        $(".react-datepicker__month-select").selectOption("July");
-        $(".react-datepicker__year-select").selectOption("1990");
-        $(".react-datepicker__week .react-datepicker__day--017").click();
+        practicePage.calendar.setDate("17", "July", "1990");
 
         //subjects
         $("#subjectsInput").setValue("Computer Science").pressEnter();
@@ -49,7 +47,10 @@ public class PracticeFormTests extends TestBase {
         $("#submit").click();
 
         //output form
-        $(".table-responsive").shouldHave(text(firstName +" "+ lastName));
+
+        $(".modal-title").shouldHave(text("Thanks for submitting the form"));
+        practicePage.checkResultsValue("Student Name", firstName +" "+ lastName);
+
         $(".table-responsive").shouldHave(text("Safronova@mail.ru"));
         $(".table-responsive").shouldHave(text("Female"));
         $(".table-responsive").shouldHave(text("7771112233"));
