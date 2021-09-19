@@ -14,7 +14,11 @@ public class PracticePage {
             firstNameInput = $("#firstName"),
             lastNameInput = $("#lastName"),
             emailInput = $("#userEmail"),
-            phoneInput = $("#userNumber");
+            phoneInput = $("#userNumber"),
+            subjectInput = $("#subjectInput"),
+            stateInput = $("#stateInput"),
+            cityInput = $("#cityInput");
+
 
     public CalendarComponent calendar = new CalendarComponent();
 
@@ -26,7 +30,6 @@ public class PracticePage {
 
     public PracticePage typeFirstName(String value) {
         firstNameInput.setValue(value);
-
         return this;
     }
 
@@ -42,6 +45,21 @@ public class PracticePage {
 
     public void typePhone(String value) {
         phoneInput.setValue(value);
+
+    }
+
+    public void subject(String value) {
+        subjectInput.setValue(value).pressEnter();
+
+    }
+
+    public void state(String value) {
+        stateInput.setValue(value).pressEnter();
+
+    }
+
+    public void city(String value) {
+        cityInput.setValue(value).pressEnter();
 
     }
 

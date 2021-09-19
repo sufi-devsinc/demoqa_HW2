@@ -16,10 +16,14 @@ public class PracticeFormWithFakerTests extends TestBase {
     String firstName = faker.name().firstName(),
             lastName = faker.name().lastName(),
             email = faker.internet().emailAddress(),
-            phone = faker.phoneNumber().cellPhone(),
-            address = faker.address().fullAddress();
-
-
+            phone = faker.phoneNumber().subscriberNumber(10),
+            address = faker.address().fullAddress(),
+            subject = "Computer Science",
+            state = "NCR",
+            city = "Delhi",
+            sName = "Student Name",
+            sEmail = "Student Email",
+            dayBirth = "17 July,1990";
 
     @Test
     void FillPracticeForm(){
@@ -33,37 +37,30 @@ public class PracticeFormWithFakerTests extends TestBase {
 
         practicePage.calendar.setDate("17", "July", "1990");
 
-
-        //subjects
-        $("#subjectsInput").setValue("Computer Science").pressEnter();
+        $("#subjectsInput").setValue(subject).pressEnter();
 
         $("[for=hobbies-checkbox-1]").click();
+
         $("#currentAddress").setValue(address);
 
-        //state
         $("#state").click();
-        $("#react-select-3-input").setValue("NCR").pressEnter();
-        //$("#react-select-3-input").pressEnter();
+        $("#react-select-3-input").setValue(state).pressEnter();
 
-        //city
         $("#city").click();
-        $("#react-select-4-input").setValue("Delhi").pressEnter();
+        $("#react-select-4-input").setValue(city).pressEnter();
 
         $("#submit").click();
 
         //output form
-        $(".table-responsive").shouldHave(text(firstName +" "+ lastName));
-        $(".table-responsive").shouldHave(text(email));
-        $(".table-responsive").shouldHave(text("Female"));
-        $(".table-responsive").shouldHave(text(phone));
-        //$(".table-responsive").shouldHave(text(calendarComponent.toString()));
-        $(".table-responsive").shouldHave(text("Computer Science"));
-        $(".table-responsive").shouldHave(text("Sports"));
-        $(".table-responsive").shouldHave(text(address));
-        $(".table-responsive").shouldHave(text("NCR Delhi"));
-
-
-        //sleep(5000);
+        $(".table-responsive").shouldHave(text(sName +" "+ firstName +" "+ lastName));
+        $(".table-responsive").shouldHave(text(sEmail +" "+ email));
+        $(".table-responsive").shouldHave(text("Gender" +" "+ "Female"));
+        $(".table-responsive").shouldHave(text("Mobile" +" "+ phone));
+        $(".table-responsive").shouldHave(text("Date of Birth" + " "+ dayBirth));
+        $(".table-responsive").shouldHave(text("Subjects" +" "+ subject));
+        $(".table-responsive").shouldHave(text("Hobbies" +" "+ "Sports"));
+        $(".table-responsive").shouldHave(text("Address" +" "+ address));
+        $(".table-responsive").shouldHave(text("State and City" +" "+ state + " "+ city));
 
     }
 }
