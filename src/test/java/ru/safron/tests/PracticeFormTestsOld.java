@@ -1,24 +1,25 @@
 package ru.safron.tests;
 
+import com.codeborne.selenide.Configuration;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
-import static ru.safron.tests.TestData.firstName;
-import static ru.safron.tests.TestData.lastName;
 
-import com.codeborne.selenide.Selenide;
-
-public class PracticeFormTests extends TestBase {
-
+public class PracticeFormTestsOld {
+    @BeforeAll
+    static void beforeAll(){
+        Configuration.startMaximized = true;
+    }
 
     @Test
     void FillPracticeForm(){
 
         open("https://demoqa.com/automation-practice-form");
-        $("#firstName").setValue(firstName);
-        $("#lastName").setValue(lastName);
+        $("#firstName").setValue("Ekaterina");
+        $("#lastName").setValue("Safronova");
         $("#userEmail").setValue("Safronova@mail.ru");
         $("[for=gender-radio-2]").click();
         $("#userNumber").setValue("7771112233");
@@ -30,26 +31,26 @@ public class PracticeFormTests extends TestBase {
         $(".react-datepicker__week .react-datepicker__day--017").click();
 
         //subjects
-        $("#subjectsInput").setValue("Computer Science").pressEnter();
-        //$("#subjectsInput").pressEnter();
+        $("#subjectsInput").setValue("Computer Science");
+        $("#subjectsInput").pressEnter();
 
         $("[for=hobbies-checkbox-1]").click();
         $("#currentAddress").setValue("Bla-bla-bla");
 
         //state
         $("#state").click();
-        $("#react-select-3-input").setValue("NCR").pressEnter();
-        //$("#react-select-3-input").pressEnter();
+        $("#react-select-3-input").setValue("NCR");
+        $("#react-select-3-input").pressEnter();
 
         //city
         $("#city").click();
-        $("#react-select-4-input").setValue("Delhi").pressEnter();
-        //$("#react-select-4-input").pressEnter();
+        $("#react-select-4-input").setValue("Delhi");
+        $("#react-select-4-input").pressEnter();
 
         $("#submit").click();
 
         //output form
-        $(".table-responsive").shouldHave(text(firstName +" "+ lastName));
+        $(".table-responsive").shouldHave(text("Ekaterina Safronova"));
         $(".table-responsive").shouldHave(text("Safronova@mail.ru"));
         $(".table-responsive").shouldHave(text("Female"));
         $(".table-responsive").shouldHave(text("7771112233"));
@@ -58,12 +59,6 @@ public class PracticeFormTests extends TestBase {
         $(".table-responsive").shouldHave(text("Sports"));
         $(".table-responsive").shouldHave(text("Bla-bla-bla"));
         $(".table-responsive").shouldHave(text("NCR Delhi"));
-
-
-        //sleep(5000);
-        //Selenide.closeWindow();
-        //Selenide.closeWebDriver();
-
 
     }
 }

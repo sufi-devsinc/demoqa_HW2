@@ -5,13 +5,14 @@ import org.junit.jupiter.api.Test;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
-import static ru.safron.tests.TestData.firstName;
-import static ru.safron.tests.TestData.lastName;
+import static ru.safron.utils.RandomUtils.*;
 
-import com.codeborne.selenide.Selenide;
+public class PracticeFormWithRandomUtilsTests extends TestBase {
 
-public class PracticeFormTests extends TestBase {
-
+    String firstName = getRandomString(10),
+            lastName = getRandomString(10),
+            email = getRandomEmail(),
+            phone = getRandomPhone();
 
     @Test
     void FillPracticeForm(){
@@ -19,9 +20,9 @@ public class PracticeFormTests extends TestBase {
         open("https://demoqa.com/automation-practice-form");
         $("#firstName").setValue(firstName);
         $("#lastName").setValue(lastName);
-        $("#userEmail").setValue("Safronova@mail.ru");
+        $("#userEmail").setValue(email);
         $("[for=gender-radio-2]").click();
-        $("#userNumber").setValue("7771112233");
+        $("#userNumber").setValue(phone);
 
         //17 Jul 1990 datebirth
         $(".react-datepicker__input-container").click();
@@ -32,6 +33,11 @@ public class PracticeFormTests extends TestBase {
         //subjects
         $("#subjectsInput").setValue("Computer Science").pressEnter();
         //$("#subjectsInput").pressEnter();
+
+        //file
+        //$("#uploadPicture").uploadFromClasspath("img/1.png");
+        //$("#subjectsInput").pressEnter();
+
 
         $("[for=hobbies-checkbox-1]").click();
         $("#currentAddress").setValue("Bla-bla-bla");
