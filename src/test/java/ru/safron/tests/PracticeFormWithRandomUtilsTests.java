@@ -16,7 +16,6 @@ public class PracticeFormWithRandomUtilsTests extends TestBase {
             phone = getRandomPhone();
 
     @Test
-    @Disabled
     void FillPracticeForm(){
 
         open("https://demoqa.com/automation-practice-form");

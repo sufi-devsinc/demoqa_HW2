@@ -16,7 +16,6 @@ public class PracticeFormTestsOld {
     }
 
     @Test
-    @Disabled
     void FillPracticeForm(){
 
         open("https://demoqa.com/automation-practice-form");

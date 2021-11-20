@@ -15,7 +15,6 @@ public class PracticeFormTests extends TestBase {
 
 
     @Test
-    @Disabled
     void FillPracticeForm(){
 
         open("https://demoqa.com/automation-practice-form");
