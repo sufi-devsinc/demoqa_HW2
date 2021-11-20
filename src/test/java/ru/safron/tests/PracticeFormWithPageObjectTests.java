@@ -5,8 +5,7 @@ import ru.safron.pages.PracticePage;
 import ru.safron.tests.TestBase;
 
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 import static ru.safron.tests.TestData.firstName;
 import static ru.safron.tests.TestData.lastName;
 
@@ -61,10 +60,7 @@ public class PracticeFormWithPageObjectTests extends TestBase {
         $(".table-responsive").shouldHave(text("NCR Delhi"));
 
 
-        //sleep(5000);
-        //Selenide.closeWindow();
-        //Selenide.closeWebDriver();
-
+       // sleep(5000);
 
     }
 }

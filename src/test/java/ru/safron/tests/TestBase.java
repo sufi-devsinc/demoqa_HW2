@@ -13,6 +13,7 @@ public class TestBase {
     static void beforeAll(){
         Configuration.startMaximized = true;
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
+
     }
 
     @AfterAll

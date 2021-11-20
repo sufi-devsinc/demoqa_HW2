@@ -1,5 +1,6 @@
 package ru.safron.tests;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.text;
@@ -14,6 +15,7 @@ public class PracticeFormTests extends TestBase {
 
 
     @Test
+    @Disabled
     void FillPracticeForm(){
 
         open("https://demoqa.com/automation-practice-form");
