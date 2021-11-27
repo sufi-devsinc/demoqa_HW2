@@ -51,7 +51,7 @@ tasks.withType(Test) {
 }
 
 task properties_tests(type: Test) {
-    systemProperties(System.getProperties("url", "https://selenoid.autotests.cloud/wd/hub"))
+    systemProperty("url", System.getProperty("url","https://selenoid.autotests.cloud/wd/hub"))
     useJUnitPlatform {
          includeTags "properties"
         }
